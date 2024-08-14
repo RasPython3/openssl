@@ -11,7 +11,9 @@
 #include "internal/cryptlib.h"
 #include "internal/numbers.h"
 #include <openssl/stack.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <openssl/e_os2.h>      /* For ossl_inline */
 
 /*

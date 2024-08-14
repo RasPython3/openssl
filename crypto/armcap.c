@@ -11,7 +11,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <setjmp.h>
-#include <signal.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <signal.h>
+#endif
 #include <openssl/crypto.h>
 #ifdef __APPLE__
 #include <sys/sysctl.h>

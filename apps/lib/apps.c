@@ -7,6 +7,8 @@
  * https://www.openssl.org/source/license.html
  */
 
+#include "ssl_python.h"
+
 #if !defined(_POSIX_C_SOURCE) && defined(OPENSSL_SYS_VMS)
 /*
  * On VMS, you need to define this to get the declaration of fileno().  The
@@ -25,12 +27,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
-#ifndef OPENSSL_NO_POSIX_IO
+#if !defined(OPENSSL_NO_POSIX_IO) && !defined(WITH_PYTHON)
 # include <sys/stat.h>
 # include <fcntl.h>
 #endif
 #include <ctype.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <openssl/err.h>
 #include <openssl/x509.h>
 #include <openssl/x509v3.h>
@@ -54,7 +58,7 @@ static int WIN32_rename(const char *from, const char *to);
 # define rename(from,to) WIN32_rename((from),(to))
 #endif
 
-#if defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS)
+#if !defined(_WIN32_WCE) && (defined(OPENSSL_SYS_WINDOWS) || defined(OPENSSL_SYS_MSDOS))
 # include <conio.h>
 #endif
 

@@ -10,7 +10,9 @@
 #define OPENSSL_SUPPRESS_DEPRECATED
 
 #include <stdio.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include "bio_local.h"
 
 #ifndef OPENSSL_NO_SOCK

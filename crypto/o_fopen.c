@@ -25,6 +25,7 @@
 #  endif
 # endif
 
+#include "ssl_python.h"
 #include "e_os.h"
 #include "internal/cryptlib.h"
 

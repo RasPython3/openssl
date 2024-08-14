@@ -9,7 +9,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include "bio_local.h"
 
 static int prefix_write(BIO *b, const char *out, size_t outl,

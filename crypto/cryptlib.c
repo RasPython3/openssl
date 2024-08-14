@@ -14,7 +14,9 @@
 
 #if defined(_WIN32)
 # include <tchar.h>
-# include <signal.h>
+# if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#  include <signal.h>
+# endif
 # ifdef __WATCOMC__
 #  if defined(_UNICODE) || defined(__UNICODE__)
 #   define _vsntprintf _vsnwprintf

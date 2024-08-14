@@ -9,7 +9,9 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include "../ssl_local.h"
 #include <openssl/evp.h>
 #include <openssl/buffer.h>

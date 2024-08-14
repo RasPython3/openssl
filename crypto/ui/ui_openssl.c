@@ -28,10 +28,14 @@
 #   define _POSIX_C_SOURCE 2
 #  endif
 # endif
-# include <signal.h>
+# if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#  include <signal.h>
+# endif
 # include <stdio.h>
 # include <string.h>
-# include <errno.h>
+# if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#  include <errno.h>
+# endif
 
 # if !defined(OPENSSL_SYS_MSDOS) && !defined(OPENSSL_SYS_VMS)
 #  include <unistd.h>
@@ -131,7 +135,7 @@
 #  include <sys/ioctl.h>
 # endif
 
-# ifdef OPENSSL_SYS_MSDOS
+# if defined(OPENSSL_SYS_MSDOS) && !defined(OPENSSL_SYS_WINCE)
 #  include <conio.h>
 # endif
 

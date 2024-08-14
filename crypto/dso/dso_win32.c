@@ -31,7 +31,11 @@ static FARPROC GetProcAddressA(HMODULE hModule, LPCSTR lpProcName)
 #  undef GetProcAddress
 #  define GetProcAddress GetProcAddressA
 
+#ifndef _WIN32_WCE
 static HINSTANCE LoadLibraryA(LPCSTR lpLibFileName)
+#else
+HINSTANCE LoadLibraryA(LPCSTR lpLibFileName)
+#endif
 {
     WCHAR *fnamw;
     size_t len_0 = strlen(lpLibFileName) + 1, i;

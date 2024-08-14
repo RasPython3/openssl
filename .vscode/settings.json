@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "e_os2.h": "c",
+        "errno.h": "c",
+        "bio_local.h": "c",
+        "cryptlib.h": "c",
+        "setjmp.h": "c"
+    }
+}

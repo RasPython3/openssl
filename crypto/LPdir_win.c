@@ -36,6 +36,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "ssl_python.h"
 #include <windows.h>
 #include <tchar.h>
 #include "internal/numbers.h"

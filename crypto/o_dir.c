@@ -7,8 +7,11 @@
  * https://www.openssl.org/source/license.html
  */
 
+#include "ssl_python.h"
 #include "e_os.h"
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 
 /*
  * The routines really come from the Levitte Programming, so to make life

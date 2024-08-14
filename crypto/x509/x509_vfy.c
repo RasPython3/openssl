@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include <time.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <limits.h>
 
 #include "crypto/ctype.h"

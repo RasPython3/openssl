@@ -18,7 +18,7 @@
 
 # include <stdarg.h>
 # include <sys/types.h>
-# ifndef OPENSSL_NO_POSIX_IO
+# if !defined(OPENSSL_NO_POSIX_IO) && !defined(WITH_PYTHON)
 #  include <sys/stat.h>
 #  include <fcntl.h>
 # endif
@@ -32,7 +32,9 @@
 # include <openssl/engine.h>
 # include <openssl/ocsp.h>
 # include <openssl/http.h>
-# include <signal.h>
+# if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#  include <signal.h>
+# endif
 # include "apps_ui.h"
 # include "opt.h"
 # include "fmt.h"

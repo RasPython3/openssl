@@ -69,7 +69,9 @@
 */
 
 #include <stdio.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <assert.h>
 #include "internal/cryptlib.h"
 #include <openssl/buffer.h>

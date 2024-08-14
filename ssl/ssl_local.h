@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <time.h>
 # include <string.h>
-# include <errno.h>
+# if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#  include <errno.h>
+# endif
 
 # include <openssl/buffer.h>
 # include <openssl/comp.h>

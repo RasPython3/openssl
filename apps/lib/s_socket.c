@@ -8,11 +8,14 @@
  */
 
 /* socket-related functions used by s_client and s_server */
+#include "ssl_python.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
-#include <signal.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+# include <signal.h>
+#endif
 #include <openssl/opensslconf.h>
 
 /*

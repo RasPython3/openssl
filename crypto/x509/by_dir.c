@@ -20,7 +20,9 @@
 #include "internal/cryptlib.h"
 #include <stdio.h>
 #include <time.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <sys/types.h>
 
 #ifndef OPENSSL_NO_POSIX_IO

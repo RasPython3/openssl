@@ -9,6 +9,7 @@
 
 /* This file has quite some overlap with engines/e_loader_attic.c */
 
+#include "ssl_python.h"
 #include <string.h>
 #include <sys/stat.h>
 #include <ctype.h>  /* isdigit */

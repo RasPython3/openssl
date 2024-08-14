@@ -10,6 +10,7 @@
 /*
  * This file is also used by the test suite. Do not #include "apps.h".
  */
+#include "ssl_python.h"
 #include "opt.h"
 #include "fmt.h"
 #include "app_libctx.h"
@@ -21,7 +22,9 @@
 #endif
 
 #include <stdlib.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <ctype.h>
 #include <limits.h>
 #include <openssl/err.h>

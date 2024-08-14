@@ -113,7 +113,7 @@
         * definitions at link-time.  This header defines WspiapiLoad() as an
         * __inline function.  https://quality.embarcadero.com/browse/RSP-33806
         */
-#    if !defined(__BORLANDC__) || !defined(__clang__)
+#    if (!defined(__BORLANDC__) || !defined(__clang__)) && !defined(_WIN32_WCE)
 #     include <wspiapi.h>
 #    endif
        /* yes, they have to be #included prior to <windows.h> */
@@ -121,7 +121,9 @@
 #   include <windows.h>
 #   include <stdio.h>
 #   include <stddef.h>
-#   include <errno.h>
+#   if !defined(_WIN32_WCE) || defined(_MSC_VER)
+#    include <errno.h>
+#   endif
 #   if defined(_WIN32_WCE) && !defined(EACCES)
 #    define EACCES   13
 #   endif
@@ -402,7 +404,7 @@ inline int nssgetpid();
         && ( (defined(_POSIX_VERSION) && _POSIX_VERSION >= 200112L)      \
              || defined(__sun) || defined(__hpux) || defined(__sgi)      \
              || defined(__osf__) )) \
-      || defined(_WIN32)
+      || (defined(_WIN32) && !defined(_WIN32_WCE))
       /* secure memory is implemented */
 #   else
 #     define OPENSSL_NO_SECURE_MEMORY

@@ -8,7 +8,9 @@
  */
 
 #include <stdio.h>
-#include <errno.h>
+#if !defined(_WIN32_WCE) || defined(_MSC_VER)
+# include <errno.h>
+#endif
 #include <openssl/buffer.h>
 #include <openssl/evp.h>
 #include "internal/bio.h"
