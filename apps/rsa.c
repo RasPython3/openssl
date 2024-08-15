@@ -12,6 +12,7 @@
 
 #include <openssl/opensslconf.h>
 
+#include "ssl_python.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

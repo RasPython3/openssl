@@ -10,6 +10,10 @@
 #ifndef OSSL_E_OS_H
 # define OSSL_E_OS_H
 
+# include "ssl_python.h"
+# ifdef _WIN32_WCE
+#  include "wince_compat.h"
+# endif
 # include <limits.h>
 # include <openssl/opensslconf.h>
 

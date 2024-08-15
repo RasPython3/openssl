@@ -7,6 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
+#include "ssl_python.h"
 #include <stdio.h>
 #include <time.h>
 #if !defined(_WIN32_WCE) || defined(_MSC_VER)

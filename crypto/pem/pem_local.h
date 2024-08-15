@@ -137,6 +137,9 @@
 
 # else
 
+// write is defined as _write in cpython-wince
+#undef write
+
 #  define IMPLEMENT_PEM_provided_write_fp(name, TYPE, type, str, asn1)    \
     IMPLEMENT_PEM_provided_write_to(name, TYPE, type, str, asn1, FILE, fp, write)
 #  define IMPLEMENT_PEM_provided_write_cb_fp(name, TYPE, type, str, asn1) \

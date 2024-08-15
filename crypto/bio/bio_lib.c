@@ -9,6 +9,7 @@
 
 #define OPENSSL_SUPPRESS_DEPRECATED
 
+#include "ssl_python.h"
 #include <stdio.h>
 #if !defined(_WIN32_WCE) || defined(_MSC_VER)
 # include <errno.h>

@@ -85,14 +85,33 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
     buffer = ossl_rand_pool_add_begin(pool, bytes_needed);
     if (buffer != NULL) {
         size_t bytes = 0;
+#if !(defined(OPENSSL_SYS_WINCE) && defined(LACK_OF_CRYPT_API))
         /* poll the CryptoAPI PRNG */
         if (CryptAcquireContextW(&hProvider, NULL, NULL, PROV_RSA_FULL,
                                  CRYPT_VERIFYCONTEXT | CRYPT_SILENT) != 0) {
             if (CryptGenRandom(hProvider, bytes_needed, buffer) != 0)
+
                 bytes = bytes_needed;
 
             CryptReleaseContext(hProvider, 0);
         }
+#else
+        size_t chunk = (size_t)sizeof(int);
+        srand(GetTickCount());
+        size_t bytes_last = bytes_needed;
+        while (bytes_last > 0) {
+            int random = rand();
+            if (bytes_last >= chunk) {
+                memcpy(buffer+(bytes_needed-bytes_last), &random, chunk);
+                bytes_last -= chunk;
+            } else {
+                memcpy(buffer+(bytes_needed-bytes_last), &random, bytes_last);
+                break;
+            }
+        }
+
+        bytes = bytes_needed;
+#endif
 
         ossl_rand_pool_add_end(pool, bytes, 8 * bytes);
         entropy_available = ossl_rand_pool_entropy_available(pool);
@@ -104,6 +123,7 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
     buffer = ossl_rand_pool_add_begin(pool, bytes_needed);
     if (buffer != NULL) {
         size_t bytes = 0;
+#if !(defined(OPENSSL_SYS_WINCE) && defined(LACK_OF_CRYPT_API))
         /* poll the Pentium PRG with CryptoAPI */
         if (CryptAcquireContextW(&hProvider, NULL,
                                  INTEL_DEF_PROV, PROV_INTEL_SEC,
@@ -113,6 +133,23 @@ size_t ossl_pool_acquire_entropy(RAND_POOL *pool)
 
             CryptReleaseContext(hProvider, 0);
         }
+#else
+        size_t chunk = (size_t)sizeof(int);
+        srand(GetTickCount());
+        size_t bytes_last = bytes_needed;
+        while (bytes_last > 0) {
+            int random = rand();
+            if (bytes_last >= chunk) {
+                memcpy(buffer+(bytes_needed-bytes_last), &random, chunk);
+                bytes_last -= chunk;
+            } else {
+                memcpy(buffer+(bytes_needed-bytes_last), &random, bytes_last);
+                break;
+            }
+        }
+
+        bytes = bytes_needed;
+#endif
         ossl_rand_pool_add_end(pool, bytes, 8 * bytes);
         entropy_available = ossl_rand_pool_entropy_available(pool);
     }

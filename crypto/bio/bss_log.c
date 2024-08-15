@@ -244,9 +244,11 @@ static int slg_puts(BIO *bp, const char *str)
 
 static void xopenlog(BIO *bp, char *name, int level)
 {
+#ifndef OPENSSL_SYS_WINCE
     if (check_winnt())
         bp->ptr = RegisterEventSourceA(NULL, name);
     else
+#endif
         bp->ptr = NULL;
 }
 
@@ -287,7 +289,9 @@ static void xsyslog(BIO *bp, int priority, const char *string)
     lpszStrings[0] = pidbuf;
     lpszStrings[1] = string;
 
+#ifndef OPENSSL_SYS_WINCE
     ReportEventA(bp->ptr, evtype, 0, 1024, NULL, 2, 0, lpszStrings, NULL);
+#endif
 }
 
 static void xcloselog(BIO *bp)

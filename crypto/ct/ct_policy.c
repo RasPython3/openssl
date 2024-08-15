@@ -11,6 +11,7 @@
 # error "CT is disabled"
 #endif
 
+#include "ssl_python.h"
 #include <openssl/ct.h>
 #include <openssl/err.h>
 #include <time.h>

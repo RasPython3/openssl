@@ -5,6 +5,7 @@
         "errno.h": "c",
         "bio_local.h": "c",
         "cryptlib.h": "c",
-        "setjmp.h": "c"
+        "setjmp.h": "c",
+        "string.h": "c"
     }
 }

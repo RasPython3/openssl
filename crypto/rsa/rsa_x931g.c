@@ -13,6 +13,7 @@
  */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
+#include "ssl_python.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>

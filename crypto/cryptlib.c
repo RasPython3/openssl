@@ -29,7 +29,7 @@
 # endif
 
 # if defined(_WIN32_WINNT) && _WIN32_WINNT>=0x0333
-#  ifdef OPENSSL_SYS_WIN_CORE
+#  if defined(OPENSSL_SYS_WIN_CORE) || defined(OPENSSL_SYS_WINCE)
 
 int OPENSSL_isservice(void)
 {

@@ -11,6 +11,7 @@
 
 /* CMP functions for PKIStatusInfo handling and PKIMessage decomposition */
 
+#include "ssl_python.h"
 #include <string.h>
 
 #include "cmp_local.h"

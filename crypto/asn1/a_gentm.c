@@ -11,6 +11,7 @@
  * GENERALIZEDTIME implementation. Based on UTCTIME
  */
 
+#include "ssl_python.h"
 #include <stdio.h>
 #include <time.h>
 #include "internal/cryptlib.h"

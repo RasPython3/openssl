@@ -13,6 +13,8 @@
 
 # include <openssl/opensslconf.h>
 
+# include "ssl_python.h"
+
 # if defined(OPENSSL_SYS_VXWORKS) || defined(OPENSSL_SYS_UEFI)
 #  define NO_SYS_PARAM_H
 # endif

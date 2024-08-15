@@ -23,6 +23,7 @@ use OpenSSL::stackhash qw(generate_stack_macros);
 #  define HEADER_CRYPTO_H
 # endif
 
+# include "ssl_python.h"
 # include <stdlib.h>
 # include <time.h>
 

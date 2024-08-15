@@ -141,7 +141,11 @@ int RAND_load_file(const char *file, long bytes)
      * no control over the buffer, so why would we want a copy of its
      * contents lying around?
      */
+#ifndef _WIN32_WCE
     setbuf(in, NULL);
+#else
+    setvbuf(in, NULL, _IONBF, 0);
+#endif
 #if defined(OPENSSL_SYS_VMS) && defined(__DECC)
 # pragma environment restore
 #endif

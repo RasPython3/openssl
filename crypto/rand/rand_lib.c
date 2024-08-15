@@ -10,6 +10,7 @@
 /* We need to use some engine deprecated APIs */
 #define OPENSSL_SUPPRESS_DEPRECATED
 
+#include "ssl_python.h"
 #include <openssl/err.h>
 #include <openssl/opensslconf.h>
 #include <openssl/core_names.h>
